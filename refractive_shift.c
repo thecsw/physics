@@ -4,7 +4,7 @@
 #define PI 3.14159265
 
 void var_input(char* str, float* f) {
-  printf(str);
+  printf("%s", str);
   scanf("%f", f);
 }
 
