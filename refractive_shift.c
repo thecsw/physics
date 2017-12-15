@@ -15,6 +15,6 @@ int main(int argc, char** argv) {
   var_input("Index 1        : ", &n1);
   var_input("Index 2        : ", &n2);
   x = ((d*(cos(a*(PI/180)+asin((n1*cos(a*(PI/180)))/(n2)))))/(cos(asin((n1*cos(a*(PI/180)))/(n2)))));
-  printf("Refractive shift : %f\n", x);
+  printf("Refractive shift : %3f\n", x);
   return 0;
 }
