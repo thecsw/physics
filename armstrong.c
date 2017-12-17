@@ -22,6 +22,6 @@ int main(int argc, char** argv) {
 	printf("Exiting....\n");
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("Execution time in seconds : %f\n", time_spent);
+    printf("\nExecution time in seconds : %f\n", time_spent);
 	return EXIT_SUCCESS;
 }
