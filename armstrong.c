@@ -4,7 +4,7 @@
 #include <time.h>
 void not(){};
 int main(int argc, char** argv) {
-	printf("Armstrong numbers.\n");
+	printf("\nArmstrong numbers.\n\n");
 	clock_t begin = clock();
 	unsigned long long a, b, n, i, f = 0;
 	unsigned long long lim = atol(argv[1]);
