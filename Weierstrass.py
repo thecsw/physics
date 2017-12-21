@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import time
 
 a = 0.2
-b = 0.1
+b = 6
 lim = 200
 w = []
 p = []
@@ -15,8 +15,7 @@ begin = time.time()
 while i < 2:
     x = 0
     for n in range(0, lim):
-        bn = math.pow(b, n)
-        cosx =  math.cos(bn * math.pi * i)
+        cosx =  math.cos(math.pow(b, n) * math.pi * i)
         x += math.pow(a, n) * cosx
     w.append(x)
     p.append(i)
@@ -24,7 +23,7 @@ while i < 2:
     i+=0.001
 #   b+=0.1
 #   o+=1
-plt.title("b = {}".format(b))
+plt.title("a = {}, b = {}".format(a, b))
 plt.plot(p, w, linewidth=0.5)
 #    p = []
 #    w = []
