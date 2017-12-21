@@ -8,7 +8,7 @@ lim = 200
 w = []
 p = []
 i = -2
-o = 0
+#o = 0
 begin = time.time()
 #while b < 10:
 #    i = -2
