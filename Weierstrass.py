@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import time
-
+# Comments are the version for animations.
 a = 0.2
 b = 6
 lim = 200
