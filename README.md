@@ -1,2 +1,3 @@
-# physics
-Some code for the physics labs
+# simpletons
+
+some simple little projects and programs also with some code that I used to learn something
