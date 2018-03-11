@@ -38,7 +38,19 @@ void insert(node* prev_node, int new_data) {
 
 void append(node** head, int new_data) {
 	node* new_node = (node*)malloc(sizeof(node));
-	
+	new_node->value = new_data;
+	new_node->next = NULL;
+	node* last = *head;
+
+	if (*head == NULL) {
+		*head = new_node;
+		return;
+	}
+
+	while (last->next != NULL)
+		 last = last->next;
+
+	last->next = new_node;
 }
 
 void printlist(node* node) {
