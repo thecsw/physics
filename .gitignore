@@ -1,0 +1,8 @@
+# No out files
+*.out
+
+# no emacs backup files
+*~
+
+# and no emacs backup folders
+.saves

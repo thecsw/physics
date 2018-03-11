@@ -25,8 +25,20 @@ void push(node** head_ref, int new_data) {
 	(*head_ref) = newNode;
 }
 
-void insert(node* prev_node) {
+void insert(node* prev_node, int new_data) {
+	if (prev_node == NULL) {
+		printf("Can't do it in front of a null");
+		return;
+	}
+	node* new_node = (node*)malloc(sizeof(node));
+	new_node->value = new_data;
+	new_node->next = prev_node->next;
+	prev_node->next = new_node;
+}
 
+void append(node** head, int new_data) {
+	node* new_node = (node*)malloc(sizeof(node));
+	
 }
 
 void printlist(node* node) {
@@ -39,5 +51,6 @@ void printlist(node* node) {
 int main() {
 	node *head = BuildList();
 	push(&head, 10);
+	insert(head->next, 90);
 	printlist(head);
 }
