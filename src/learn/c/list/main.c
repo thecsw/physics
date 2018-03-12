@@ -1,10 +1,15 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 typedef struct nodejs {
 	int value;
 	struct nodejs* next;
 } node;
+
+void wait(float secs) {
+	
+}
 
 node* BuildList(){
 	node* head = NULL;
@@ -25,15 +30,25 @@ void push(node** head_ref, int new_data) {
 	(*head_ref) = newNode;
 }
 
-void insert(node* prev_node, int new_data) {
+node* insert(node* prev_node, int new_data) {
 	if (prev_node == NULL) {
 		printf("Can't do it in front of a null");
-		return;
+		return NULL;
 	}
 	node* new_node = (node*)malloc(sizeof(node));
 	new_node->value = new_data;
 	new_node->next = prev_node->next;
 	prev_node->next = new_node;
+	return new_node;
+}
+
+void delete(node* head, node* entry) {
+	node** indirect = &head;
+	while((*indirect) != entry)
+		indirect = &((*indirect)->next);	
+	*indirect = entry->next;
+	
+	free((*indirect)->next);
 }
 
 void append(node** head, int new_data) {
@@ -60,9 +75,19 @@ void printlist(node* node) {
 	}
 }
 
-int main() {
+int main(int argc, char** argv) {
 	node *head = BuildList();
-	push(&head, 10);
-	insert(head->next, 90);
+	const char* progress = "-\\|/-";
+	printf("Testing the progress[-]");
+	for (int i = 0; i < 1001; i++) {
+		printf("%c%c%c]", 8, 8, progress[i%5]);
+		fflush(stdout);
+		wait(1);
+	}
+/* push(&head, 10); */
+	/* delete(head, insert(head->next, 90)); */
+	push(&head, 100);
+	printf("\n\n");
 	printlist(head);
+	printf("\n\thead (%#x)\n\t&head (%#x)\n\t*(&head) (%#x)\n", head, &head, *(&head));
 }
