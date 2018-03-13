@@ -7,9 +7,6 @@ typedef struct nodejs {
 	struct nodejs* next;
 } node;
 
-void wait(float secs) {
-	
-}
 
 node* BuildList(){
 	node* head = NULL;
@@ -47,8 +44,6 @@ void delete(node* head, node* entry) {
 	while((*indirect) != entry)
 		indirect = &((*indirect)->next);	
 	*indirect = entry->next;
-	
-	free((*indirect)->next);
 }
 
 void append(node** head, int new_data) {
@@ -77,17 +72,9 @@ void printlist(node* node) {
 
 int main(int argc, char** argv) {
 	node *head = BuildList();
-	const char* progress = "-\\|/-";
-	printf("Testing the progress[-]");
-	for (int i = 0; i < 1001; i++) {
-		printf("%c%c%c]", 8, 8, progress[i%5]);
-		fflush(stdout);
-		wait(1);
-	}
-/* push(&head, 10); */
-	/* delete(head, insert(head->next, 90)); */
+	push(&head, 10);
 	push(&head, 100);
-	printf("\n\n");
+	delete(head, head->next);
 	printlist(head);
 	printf("\n\thead (%#x)\n\t&head (%#x)\n\t*(&head) (%#x)\n", head, &head, *(&head));
 }
