@@ -46,6 +46,13 @@ void delete(node* head, node* entry) {
 	*indirect = entry->next;
 }
 
+void delete_one (node* head, node* entry) {
+	node* indirect = head;
+	while(indirect->next != entry)
+		indirect = indirect->next;
+	indirect = entry->next;
+}
+
 void append(node** head, int new_data) {
 	node* new_node = (node*)malloc(sizeof(node));
 	new_node->value = new_data;
@@ -74,6 +81,7 @@ int main(int argc, char** argv) {
 	node *head = BuildList();
 	push(&head, 10);
 	push(&head, 100);
+	printf("\n%d\n", head->value);
 	delete(head, head->next);
 	printlist(head);
 	printf("\n\thead (%#x)\n\t&head (%#x)\n\t*(&head) (%#x)\n", head, &head, *(&head));
