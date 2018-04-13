@@ -17,9 +17,11 @@ int main() {
 		getmaxyx(stdscr, max_y, max_x);
 		clear();
 		mvprintw(y, x, "O");
+		mvprintw(max_y-1, 0, "%dx%d", max_y, max_x);
+		
 		refresh();
 		usleep(DELAY);
-
+		
 		next_x = x + direction;
 		if (next_x > max_x || next_x < 0)
 			direction *= -1;

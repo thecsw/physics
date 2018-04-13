@@ -1,8 +1,8 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <aalib.h>
 aa_context *context;
-void main(void)
-{
+void main(void) {
 	context = aa_autoinit(&aa_defparams);
 	if(context == NULL) {
 		fprintf(stderr,"Cannot initialize AA-lib. Sorry\n");

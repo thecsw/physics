@@ -9,8 +9,7 @@ typedef struct nodejs {
 
 
 node* BuildList(){
-	node* head = NULL;
-	
+	node* head = NULL;	
 	for (int i = 5; i >= 0; i--) {
 		node* newNode = (node*)malloc(sizeof(node));
 		newNode->value = i;
@@ -23,8 +22,8 @@ node* BuildList(){
 void push(node** head_ref, int new_data) {
 	node* newNode = (node*)malloc(sizeof(node));
 	newNode->value = new_data;
-	newNode->next = (*head_ref);
-	(*head_ref) = newNode;
+	newNode->next = *head_ref;
+	*head_ref = newNode;
 }
 
 node* insert(node* prev_node, int new_data) {
@@ -42,21 +41,16 @@ node* insert(node* prev_node, int new_data) {
 void delete(node* head, node* entry) {
 	node** indirect = &head;
 	while((*indirect) != entry)
-		indirect = &((*indirect)->next);	
+		indirect = &((*indirect)->next);
 	*indirect = entry->next;
-}
-
-void delete_one (node* head, node* entry) {
-	node* indirect = head;
-	while(indirect->next != entry)
-		indirect = indirect->next;
-	indirect = entry->next;
+	free(entry);
 }
 
 void append(node** head, int new_data) {
 	node* new_node = (node*)malloc(sizeof(node));
 	new_node->value = new_data;
 	new_node->next = NULL;
+
 	node* last = *head;
 
 	if (*head == NULL) {
@@ -75,14 +69,13 @@ void printlist(node* node) {
 		printf("\t%d\t(%#x)\n", node->value, node);
 		node = node->next;
 	}
+	printf("\n");
 }
 
-int main(int argc, char** argv) {
+int main(void) {
 	node *head = BuildList();
+	printlist(head);
 	push(&head, 10);
-	push(&head, 100);
-	printf("\n%d\n", head->value);
 	delete(head, head->next);
 	printlist(head);
-	printf("\n\thead (%#x)\n\t&head (%#x)\n\t*(&head) (%#x)\n", head, &head, *(&head));
 }
