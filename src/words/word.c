@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define BUFFER_SIZE 8196
+#define WORD_SIZE 32
+
 typedef struct {
 	char *string;
 	size_t length;
@@ -26,29 +29,34 @@ ranking *find_max(ranking *array, int top);
 
 int main(int argc, char **argv)
 {
-	assert(argc == 2);
-	char filename[32];
+	assert(argc == 3);
+	char filename[WORD_SIZE];
 	strcpy(filename, argv[1]);
 
 	content *text = read_file(filename);
 
 	ranking *words = rank_words(text);
 
-/*
-	size_t j = words->size;
-	for (size_t i = 1; i < j - 1; i++) {
-		for (size_t m = 0; m < j - i - 1; m++) {
-			if (words[i].frequency < words[i-1].frequency) {
-				int temp = words[i].frequency; 
-				words[i].frequency = words[i-1].frequency;
-				words[i-1].frequency = temp;
+	for (size_t i = 0; i < words->size - 1; i++) {
+		for (size_t j = 0; j < words->size - i - 1; j++) {
+			if (words[j].frequency < words[j+1].frequency) {
+				int temp = words[j].frequency;
+				words[j].frequency = words[j+1].frequency;
+				words[j+1].frequency = temp;
+
+				char ctemp[32];
+				strcpy(ctemp, words[j].word);
+				strcpy(words[j].word, words[j+1].word);
+				strcpy(words[j+1].word, ctemp);
 			}
 		}
 	}
-*/
-	for (size_t i = 0; i < words->size; i++)
-		printf("[%lu]: %s : %d\n", i, words[i].word, words[i].frequency);
 
+	size_t  n = atol(argv[2]);
+	assert(n <= words->size);
+	for (size_t i = 0; i < n; i++) {
+		printf("[%lu]: %s : %d\n", i, words[i].word, words[i].frequency);
+	}
 	puts("\n");
 }
 
@@ -67,11 +75,11 @@ content *read_file(char *file_name)
 	assert(fp);
 
 	int tot_word = 0;
-	char **buffer = (char **)malloc(1000 * sizeof(char *));
+	char **buffer = (char **)malloc(BUFFER_SIZE * sizeof(char *));
 	content *text_file = (content *)malloc(sizeof(content));
 	while (!feof(fp)) {
-		char *word = (char *)malloc(sizeof(char) * 32);
-		fscanf(fp, "%[^0-9]", word);
+		char *word = (char *)malloc(sizeof(char) * WORD_SIZE);
+		fscanf(fp, "%s", word);
 		size_t length = strlen(word);
 		buffer[tot_word] = (char *)malloc(length * sizeof(char));
 		strcpy(buffer[tot_word], word);
@@ -90,7 +98,7 @@ content *read_file(char *file_name)
 		text_file->words[i].length = len;
 	}
 
-	printf("%lu\n", text_file->size);
+//	printf("%lu\n", text_file->size);
 	fclose(fp);
 
 	free(buffer);
@@ -127,6 +135,7 @@ ranking *rank_words(content *text)
 ranking *find_max(ranking *array, int top)
 {
 	assert(array[0].frequency);
+	assert(top > -1);
         ranking *max_f = (ranking *)malloc(sizeof(ranking));
 	max_f->frequency = 0;
         for (size_t i = 1; i < array->size; i++) {
