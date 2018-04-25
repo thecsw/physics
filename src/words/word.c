@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 8196
+#define BUFFER_SIZE 65536
 #define WORD_SIZE 32
 
 typedef struct {
@@ -39,24 +39,29 @@ int main(int argc, char **argv)
 
 	for (size_t i = 0; i < words->size - 1; i++) {
 		for (size_t j = 0; j < words->size - i - 1; j++) {
-			if (words[j].frequency < words[j+1].frequency) {
+			if (words[j].frequency < words[j + 1].frequency) {
 				int temp = words[j].frequency;
-				words[j].frequency = words[j+1].frequency;
-				words[j+1].frequency = temp;
+				words[j].frequency = words[j + 1].frequency;
+				words[j + 1].frequency = temp;
 
 				char ctemp[32];
 				strcpy(ctemp, words[j].word);
-				strcpy(words[j].word, words[j+1].word);
-				strcpy(words[j+1].word, ctemp);
+				strcpy(words[j].word, words[j + 1].word);
+				strcpy(words[j + 1].word, ctemp);
 			}
 		}
 	}
 
-	size_t  n = atol(argv[2]);
+	size_t n = atol(argv[2]);
 	assert(n <= words->size);
+	printf("\t--------------------------------\n");
+	printf("\t|N\t|Word\t|Frequency\t|\n");
+	printf("\t--------------------------------\n");
 	for (size_t i = 0; i < n; i++) {
-		printf("[%lu]: %s : %d\n", i, words[i].word, words[i].frequency);
+		printf("\t|%lu\t|%s\t|%d\t\t|\n", i, words[i].word,
+		       words[i].frequency);
 	}
+	printf("\t--------------------------------");
 	puts("\n");
 }
 
@@ -98,7 +103,7 @@ content *read_file(char *file_name)
 		text_file->words[i].length = len;
 	}
 
-//	printf("%lu\n", text_file->size);
+	//	printf("%lu\n", text_file->size);
 	fclose(fp);
 
 	free(buffer);
@@ -128,7 +133,7 @@ ranking *rank_words(content *text)
 				checked[i].frequency++;
 		}
 	}
-	printf("SIZE -> %lu\n", checked->size);
+//	printf("SIZE -> %lu\n", checked->size);
 	return checked;
 }
 
@@ -136,10 +141,11 @@ ranking *find_max(ranking *array, int top)
 {
 	assert(array[0].frequency);
 	assert(top > -1);
-        ranking *max_f = (ranking *)malloc(sizeof(ranking));
+	ranking *max_f = (ranking *)malloc(sizeof(ranking));
 	max_f->frequency = 0;
-        for (size_t i = 1; i < array->size; i++) {
-		if ((array[i].frequency > max_f->frequency) && (array[i].frequency < top)) {
+	for (size_t i = 1; i < array->size; i++) {
+		if ((array[i].frequency > max_f->frequency) &&
+		    (array[i].frequency < top)) {
 			max_f->frequency = array[i].frequency;
 			max_f->word = array[i].word;
 		}
