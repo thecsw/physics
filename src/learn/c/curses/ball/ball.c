@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 
-#define DELAY 30000
+#define DELAY 100000
 
 int main() {
 	int x = 0, y = 0;

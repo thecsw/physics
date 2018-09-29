@@ -3,13 +3,17 @@
 
 int main() {
 	initscr();
-	noecho();
-	curs_set(FALSE);
-
-	mvprintw(0, 0, "Hello, World!");
+//	raw();
+	//noecho();
+	//curs_set(FALSE);
+//	printw("Hello World!");
+	for (int i = 0; i < 10; i++) {
+		mvprintw(i, i, "Hello, World!");
+	}
+	printw("Hello there!");
+//	mvprintw(0, 2, "Hello, World!");
 	refresh();
-	
-	sleep(1);
+        getch();
 	endwin();
 	return 0;
 }
