@@ -1,0 +1,279 @@
+*Group class
+Date: 08.07.16
+Time: 12:09-13:56
+Sagindyk Urazayev AKA thecsw
+Quantum College ib 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+RGB (Red Green Blue).
+Black- all 0. For example:  0000.0000.0000.0000.0000.0000.
+White - all 1. For example: 1111.1111.1111.1111.1111.1111.
+Gray - R==G==B. For example: 1010.1010.1010.1010.1010.1010.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Compiler - compiles the whole program from the beginning to the end.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Interpreter - compiles the program line by line.
+Before object point the compiler is working and creating object files, while after that interpreter is started to work - Java Virtual Machine. This 2-stage
+compilation helps Java to successfully run and compile on any Operation System without the code changes. It's very useful, the compilation could take longer time and
+more resources to compile, but the program will be milti-OS. All Java resources are free-to-use and download. So compiler translates the code into binary and after 
+successful translation it will connect interpretator to connect language libraries.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Differences between compiler and interpretator- if we have an error in 101 line, all before 100 lines will be translated successfully, easy to find error, but still 
+code is partly translated. For interpretator you need code and computer. While using compiler, you neeed only code and the compiler compilates the whole program at
+once and it will translate your code only if you dont have errors in it. Compiler will create *.exe file, while interpretator will not.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax - the language syntax rules: words, space, tabs etc.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Semantics - logic errors and algorithms.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+RunTime errors -  when the error occurs while the application work, for example dividing by zero or getting out of the array range.
+How to solve runtime errors:
+1) If()... {Set conditions, what to do}
+2) Try {the suspicious operation}
+catch(solve the runtime error, for example change the array range or cgange zero).
+This solution will not let the application stop or freeze, what to do next in catch, depends on the programmer.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Systems Life Cycle:
+1) Analysis. (Collecting information and resources)
+2) Design. (Creating the visual look and your destination point)
+3) Implementation. (Creating the actual software/application with it code and algorithm)
+4) Operation (Alpha and Beta-testing, upgrading and creating new features of the application)
+5) Maintaince. (Using the application/software)
+And it goes again and again to upgrade the system.
+P.S. Also there is Software's Life Cycle, and it belongs to the implementation stage. Talk about it later.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+RAM(Random Access Memories)- volatile meory, when the power is switched off, all the data is gone.
+Primary memory- RAM.
+Secondary memory- USB's, Floppy's and everything nice,
+Cache belongs to CPU and located with CPU, but the cache is more and a lot more expensive than RAM and its faster. Cache is working only with the CPU.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Basic Programming language.
+Visual Basic.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*Additional class
+Date: 09.07.16
+Time: 12:38
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Class, statements and variables.
+Variables+actions=functions(methods).
+Int- 2^32.
+Double- 2^64
+ _____________________________________________________________________
+|____int_____|________________________________________________________| - Computer memory
+
+Functions don't store memory, they're using it oly in time of call, and after execution and solution, they are gone.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class Daw{
+int ...
+double...
+}
+Draw draw = new Draw(); <-- Creates an object by class or complicated data type.
+draw.Brush=3;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+English CS:
+Draw- object;
+picture- instance;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Class features:
+1) Incapsulation (all methods and variables has their own security: public or private or protected)
+public: variables or function with public is visible everywhere for all other classes.
+private: variables or function with public is invisible everywhere for all other classes.
+protected: it's visible only if viewclass is subclass of protected superclass.
+P.S. Each class can get different security levels.
+Or use function Set.... to control the true value of variables.
+If class needs to know the value of other class with private variable you can use function Get....
+2) Inheritans
+When some class taking the parameteres and everything from other class, to inject it all in themself, being a copy of superclass with few more new parameteres, 
+variebles, functions. Subclass>superclass.
+For example:
+Point <-- Line <-- Triangle <-- Rectangle<-- Pentagon <-- Hexagon etc.
+3) Poliformism
+Creating same and identical functions in different classes. 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*Overloading:
+int f(int x, int y){
+return x+y;
+}
+int f(double x, double y){
+return x*y;
+}
+Input:
+f(3.0, 4.0);
+f(3, 4);
+The compiler will know what to do.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Date: 10.07.16
+Time: 14:20
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to interconnect different classes and pages of the program between each other:
+In c++ we're using #include <library name.h> to inject different libraries.
+In java all	classes in one package can see each other with no trouble, otherwise we need to inject another package.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Static variables:
+
+class dog{
+ public static howmanydogsinthistower()
+}
+
+output Dog.howm...own; <-- only static
+If var is nonstatic its injected in all objects.
+P.S.function main is static
+If we need one value for all class objects, use static
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Constructor is coming, when we're creating class object
+1. public 
+2. no return
+3. constructor name = class name
+public Dog(int color){
+eyecolor=color;
+}
+Btw there is 2 main constructor types: default and zero, heh.
+default- default constructor, that is giving some value of the object parameters:
+coloreyes(int color){
+eyecolor=color;
+}
+zero- constructor is coming, when the object parameter space not filled.
+coloreyes(){
+eyecolor=0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Date: 10.07.16
+Time: 14:20
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+All vaiables in main are static.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Setmethods-mutators
+Getmethods-accessors
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Date: 12.09.16
+Time: 10:33
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+If we declare the variable like static one, we can call it thrugh the class name and thriugh the class's instance name.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+For example if we have 2 variables in one class (one is declaed in class and the otehr one is declared in this class's method), example:
+    class B {
+        private static int n;
+        public void setn(n) {
+            this.n=n;
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Date: 14.09.16
+Time: 12:40
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+If we will decalre in class static and non-static variable, we can use only static variable in main function and to call nonstatic we need to create instance and 
+call it. 
+If we dont need to to this all, we can just create constructor on main and in that constructor we can use all the type variebles.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ARRAYS WITH PTIMITIVE TYPES
+To create array simple, we need to write this: 
+int/*OR 2D ARRAY*/[] arr1 =  new int();                                       ! ONLY FOR PRIMITVE, FOR COMPLEX TYPE YOU NEED TO GET TO 2-STEP CREATION, LOOK DOWN !
+        OR
+int/*OR 2D ARRAY*/[] arr1 = {2,3,4,5,6,7}; <--Here we are giving the array values.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ARRAYS WITH COMPLEX TYPE
+In java we can't create 2D array only by 1 line of code, we need to use 2-step-2D-array-creation-method. I'll explain using examples.
+So here we can see the creation of 2D array in c++: 
+    int array2d[37][37];
+P.S. IN C++ that's all.
+BUT in Java you wont get so easy.
+1 step, you're giving the name for 2d array:
+    Duck/*OR 1D ARRAY*/[][] pack = new Duck[37][37]; --we are creating the array size.
+LORE:
+Duck-our class with integere variabel duckleg.
+pack is out array name.
+Duck/*OR 1D ARRAY */[37][37]-it's our array size.
+2 step, we are actuallyy "activating the array by giving values and meaning *cough* of life *cough*, nevermind, here it is:
+    pack[i][n]=new Duck(i+n/*or any value*/); then we are creating constructor for each array slot.
+So here, we took the pack name and gave it a life by activating it with Duck and value.
+BUT then to use it, for example to output it, we can use it like this:
+    System.out.println(pack[i][n].duckleg);
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Date: 19.09.16
+Time: 10:23
+Sagidnyk Urazayev AKA thecsw
+Quantum College ib
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Primitive types: dont have anything but value. For example: int, char. No variables, no methods, only empty value. No constructor.
+Complex types: it's the class type.
+
+Fast code:
+class Dog {...}
+class Cat{...}
+class Building{
+    public building (int x, int y) {
+        Dog[] aaa=new Dog[x];
+        for (i=0; i<x; i++) {
+            aaa[i]=new Dog();
+        }
+        Cat[] bbb=new Cat[y];
+        for (i=0; i<x; i++) {
+            bbb[i]=new Cat();
+        }
+    Building home=new Building(2,3);
+    }
+}
+
+Homework 28.09.16 up to pp23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://csilluminated.jbpub.com/3e/
+
