@@ -12,46 +12,50 @@
 
 #define ARRAY_SIZE 128
 #define MAX_VALUE 48
-#define DELAY 0
+#define DELAY 20
 
-void print_array(int *arr, size_t size, int y, int wacky);
+void print_array(int* arr, size_t size, int y, int wacky);
 void update_screen(int y, int ind1, int ind2, int val1, int val2, int swaps,
-		   int comps);
-void randomize(int *arr, size_t size, int max_value);
-void shuffle(int *arr, size_t size, int max_value);
-void bubble_sort(int *arr, size_t size, int y);
+    int comps);
+void randomize(int* arr, size_t size, int max_value);
+void shuffle(int* arr, size_t size, int max_value);
+void bubble_sort(int* arr, size_t size);
+void selection_sort(int* arr, size_t size);
+void insertion_sort(int* arr, size_t size);
 void clear_x(int x, int y);
 
-char *ch = "@";
-char *space = " ";
+char* ch = "@";
+char* space = " ";
+
+int MAX_X, MAX_Y;
 
 int main(void)
 {
-	int max_x, max_y;
 	initscr();
 	curs_set(0);
 	keypad(stdscr, TRUE);
 	noecho();
 	cbreak();
 
-	getmaxyx(stdscr, max_y, max_x);
+	getmaxyx(stdscr, MAX_Y, MAX_X);
 
-	int arr_size = max_x;
+	int arr_size = MAX_X;
 	{
-		int *arr = (int *)malloc(sizeof(int) * arr_size);
+		int* arr = (int*)malloc(sizeof(int) * arr_size);
 
-		//randomize(arr, arr_size, max_y);
-		shuffle(arr, arr_size, max_y);
-		print_array(arr, arr_size, max_y, 0);
+		//randomize(arr, arr_size, MAX_Y);
+		shuffle(arr, arr_size, MAX_Y);
+		print_array(arr, arr_size, MAX_Y, 0);
 		clock_t start = clock();
-		bubble_sort(arr, arr_size, max_y);
+		selection_sort(arr, arr_size);
 		clock_t end = clock();
-		print_array(arr, arr_size, max_y, 1);
+		print_array(arr, arr_size, MAX_Y, 1);
 		double exec_time = ((double)(end - start) / CLOCKS_PER_SEC);
-		mvprintw(4, 1, "Sorting algorithm:            Bubble Sort");
+		mvprintw(4, 1, "Sorting algorithm:            Selection Sort");
 		mvprintw(5, 1, "Number of array elements:     %d", arr_size);
 		mvprintw(6, 1, "Time taken to sort the array: %f", exec_time);
 
+		mvprintw(8, 1, "Written by Sagindyk Urazayev");
 		free(arr);
 		getch();
 	}
@@ -60,7 +64,7 @@ int main(void)
 	return 0;
 }
 
-void print_array(int *arr, size_t size, int y, int wacky)
+void print_array(int* arr, size_t size, int y, int wacky)
 {
 	if (wacky) {
 		attron(A_BLINK);
@@ -77,7 +81,7 @@ void print_array(int *arr, size_t size, int y, int wacky)
 }
 
 void update_screen(int y, int ind1, int ind2, int val1, int val2, int swaps,
-		   int comps)
+    int comps)
 {
 	usleep(100 * DELAY);
 
@@ -90,10 +94,10 @@ void update_screen(int y, int ind1, int ind2, int val1, int val2, int swaps,
 	for (int i = 0; i < val1; i++)
 		mvprintw(y - i, ind1, ch);
 
-	attron(A_BOLD);
+//	attron(A_BOLD);
 	for (int i = 0; i < val2; i++)
 		mvprintw(y - i, ind2, ch);
-	attroff(A_BOLD);
+//	attroff(A_BOLD);
 	refresh();
 }
 
@@ -103,14 +107,14 @@ void clear_x(int y, int x)
 		mvprintw(i, x, space);
 }
 
-void randomize(int *arr, size_t size, int max_value)
+void randomize(int* arr, size_t size, int max_value)
 {
 	srand(time(NULL));
 	for (size_t i = 0; i < size; i++)
 		arr[i] = rand() % max_value;
 }
 
-void shuffle(int *arr, size_t size, int max_value)
+void shuffle(int* arr, size_t size, int max_value)
 {
 	for (size_t i = 0; i < size; i++) {
 		arr[i] = max_value * i / size;
@@ -124,10 +128,10 @@ void shuffle(int *arr, size_t size, int max_value)
 	}
 }
 
-void bubble_sort(int *arr, size_t size, int y)
+void bubble_sort(int* arr, size_t size)
 {
-        int swaps = 0, comps = 0;
-        for (size_t i = 0; i < size - 1; i++)
+	int swaps = 0, comps = 0;
+	for (size_t i = 0; i < size - 1; i++)
 		for (size_t j = 0; j < size - i - 1; j++) {
 			if (arr[j] > arr[j + 1]) {
 				int temp = arr[j];
@@ -136,8 +140,47 @@ void bubble_sort(int *arr, size_t size, int y)
 				swaps++;
 			}
 			comps++;
-			update_screen(y, j, j + 1, arr[j], arr[j + 1], swaps,
-				      comps);
+			update_screen(MAX_Y, j, j + 1, arr[j], arr[j + 1], swaps,
+			    comps);
 		}
 }
 
+void selection_sort(int* arr, size_t size)
+{
+	int swaps = 0, comps = 0;
+	for (size_t i = 0; i < size - 1; i++) {
+		size_t min = i;
+		for (size_t j = i + 1; j < size; j++)
+			if (arr[j] < arr[min]) {
+				min = j;
+				comps++;
+			}
+		if (i != min) {
+			int temp = arr[i];
+			arr[i] = arr[min];
+			arr[min] = temp;
+			swaps++;
+		}
+		update_screen(MAX_Y, i, min, arr[i], arr[min], swaps,
+		    comps);
+	}
+}
+
+void insertion_sort(int* arr, size_t size)
+{
+	int swaps = 0, comps = 0;
+	for (size_t i = 1; i < size; i++) {
+		int key = arr[i];
+		size_t j = i - 1;
+		/* Advance until the spot is found */
+		while (j >= 0 && arr[j] > key) {
+			arr[j + 1] = arr[j];
+			j--;
+			comps++;
+			swaps++;
+			update_screen(MAX_Y, j, j+1, arr[j], arr[j+1], swaps,
+				      comps);
+		}
+		arr[j + 1] = key;
+	}
+}
