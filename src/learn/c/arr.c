@@ -12,7 +12,7 @@
 
 #define ARRAY_SIZE 128
 #define MAX_VALUE 48
-#define DELAY 20
+#define DELAY 0
 
 void print_array(int* arr, size_t size, int y, int wacky);
 void update_screen(int y, int ind1, int ind2, int val1, int val2, int swaps,
@@ -47,7 +47,7 @@ int main(void)
 		shuffle(arr, arr_size, MAX_Y);
 		print_array(arr, arr_size, MAX_Y, 0);
 		clock_t start = clock();
-		selection_sort(arr, arr_size);
+		insertion_sort(arr, arr_size);
 		clock_t end = clock();
 		print_array(arr, arr_size, MAX_Y, 1);
 		double exec_time = ((double)(end - start) / CLOCKS_PER_SEC);
